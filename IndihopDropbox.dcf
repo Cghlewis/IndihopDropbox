@@ -1,0 +1,12 @@
+name: IndihopDropbox
+title: IndihopDropbox
+username:
+account: cghlewis
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 905199
+bundleId: 2057859
+url: https://cghlewis.shinyapps.io/IndihopDropbox/
+when: 1556896684.0266
+asMultiple: FALSE
+asStatic: FALSE
