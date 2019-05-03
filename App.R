@@ -4,10 +4,10 @@ library(tidyverse)
 library(DT)
 library(rdrop2)
 
-#Create a token I can call
+#Create a token we can call to access dropbox (the droptoken is from the global r file)
 token <- readRDS("droptoken.rds")
 
-#load responses into a response folder
+#load responses into a response folder on dropbox
 
 outputDir <- "responses"
 
