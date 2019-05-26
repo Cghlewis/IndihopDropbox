@@ -87,7 +87,8 @@ ui <- fluidPage(
     sidebarPanel(
       selectInput("Name",
                   "Your Name",
-                  c(" ","Test","Crystal", "Josh", "Jacob", "Rena","Lacy", "Dre")
+                  c(" ","Test","Crystal", "Josh", "Jacob", "Rena","Lacy", "Matt","Dre",
+                    "JW")
       ),
       selectInput("Beer",
                   "Name of Beer", 
@@ -161,7 +162,7 @@ server = function(input, output, session) {
     
     data%>%
       rowwise%>%
-      mutate(Score = (flavor*.4)+(aroma*.1)+(appearance*.1)+(drinkability*.4)) %>%
+      mutate(Score = (flavor*.3)+(aroma*.2)+(appearance*.1)+(drinkability*.4)) %>%
       group_by(Beer) %>%
       summarize(AvgScore = mean(Score), SD=sd(Score))%>%
       arrange(desc(AvgScore)) %>%
