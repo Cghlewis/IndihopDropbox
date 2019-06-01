@@ -87,13 +87,18 @@ ui <- fluidPage(
     sidebarPanel(
       selectInput("Name",
                   "Your Name",
-                  c(" ","Test","Crystal", "Josh", "Jacob", "Rena","Lacy", "Matt","Dre",
-                    "JW")
+                  c(" ","Test","Crystal", "Dre", "Ian", "Jacob", "Josh", "JW","Lacy",
+                    "Matt", "Rena")
       ),
       selectInput("Beer",
                   "Name of Beer", 
-                  c(" ","4 Hands City Wide Pale Ale","Civil Life Scottish Ale",
-                    "2nd Shift Katy Brett Saison", "Logboat Shiphead"
+                  c(" ","Beer 1","Beer 2","Beer 3", "Beer 4", "Beer 5", "Beer 6", "Beer 7",
+                    "Beer 8", "Beer 9", "Beer 10", "Beer 11", "Beer 12", "Beer 13", "Beer 14",
+                    "Beer 15", "Beer 16", "Beer 17", "Beer 18", "Beer 19", "Beer 20", "Beer 21",
+                    "Beer 22", "Beer 23", "Beer 24", "Beer 25", "Beer 26", "Beer 27", "Beer 28",
+                    "Beer 29", "Beer 30", "Beer 31", "Beer 32", "Beer 33", "Beer 34", "Beer 35",
+                    "Beer 36", "Beer 37", "Beer 38", "Beer 39", "Beer 40", "Beer 41",
+                    "Beer 42", "Beer 43"
                   )
       ),
       sliderInput("flavor", "Flavor Rating (Weight 40%)",  min = 1, max = 5, step = 1, value = 1),
