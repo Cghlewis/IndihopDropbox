@@ -96,8 +96,8 @@ ui <- fluidPage(
                     "2nd Shift Katy Brett Saison", "Logboat Shiphead"
                   )
       ),
-      sliderInput("flavor", "Flavor Rating (Weight 30%)",  min = 1, max = 5, step = 1, value = 1),
-      sliderInput("aroma", "Aroma Rating (Weight 20%)",
+      sliderInput("flavor", "Flavor Rating (Weight 40%)",  min = 1, max = 5, step = 1, value = 1),
+      sliderInput("aroma", "Aroma Rating (Weight 10%)",
                   min = 1, max = 5, step = 1, value = 1),
       sliderInput("appearance", "Appearance Rating (Weight 10%)",
                   min = 1, max = 5, step = 1, value = 1),
@@ -162,15 +162,15 @@ server = function(input, output, session) {
     
     data%>%
       rowwise%>%
-      mutate(Score = (flavor*.3)+(aroma*.2)+(appearance*.1)+(drinkability*.4)) %>%
+      mutate(Score = (flavor*.4)+(aroma*.1)+(appearance*.1)+(drinkability*.4)) %>%
       group_by(Beer) %>%
       summarize(AvgScore = mean(Score), SD=sd(Score))%>%
       arrange(desc(AvgScore)) %>%
-      slice(1:3) %>%
+      slice(1:5) %>%
       ggplot(aes(x=reorder(Beer, -AvgScore), y=AvgScore)) +
       geom_bar(stat="identity", fill = "goldenrod2", color="black")+geom_text(aes(label=round(AvgScore,1)),
                                                                               position = position_nudge(y = -8))+
-      xlab("Top 3 Beers")+ylab("Average Weighted Score")+geom_errorbar(aes(ymin=AvgScore-SD, ymax=AvgScore+SD), width=.2,
+      xlab("Top 5 Beers")+ylab("Average Weighted Score")+geom_errorbar(aes(ymin=AvgScore-SD, ymax=AvgScore+SD), width=.2,
                                                                        position=position_dodge(.9))+
       theme(axis.text=element_text(face="bold"))+theme_classic()+ylim(0,6.5)
     
