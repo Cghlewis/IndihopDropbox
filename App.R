@@ -5,6 +5,12 @@ library(DT)
 library(rdrop2)
 library(stringr)
 
+#Future updates
+#1. Add user name and beer name to filename
+#2. Add # of responses per beer to labels
+#3. Make scoring range 1-10 per category, need more variation
+#4. Remove aroma and appearance, add aftertaste and overall score
+
 #Create a token we can call to access dropbox (the droptoken is from the global r file)
 token <- readRDS("droptoken.rds")
 
