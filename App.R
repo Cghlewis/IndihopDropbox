@@ -3,6 +3,7 @@ library(ggplot2)
 library(tidyverse)
 library(DT)
 library(rdrop2)
+library(stringr)
 
 #Create a token we can call to access dropbox (the droptoken is from the global r file)
 token <- readRDS("droptoken.rds")
@@ -92,18 +93,17 @@ ui <- fluidPage(
       ),
       selectInput("Beer",
                   "Name of Beer", 
-                  c(" ", "Test Beer", "Beer 1","Beer 2","Beer 3", "Beer 4", "Beer 5", 
-                    "Beer 6", "Beer 7",
-                    "Beer 8", "Beer 9", "Beer 10", "Beer 11", "Beer 12", "Beer 13", 
-                    "Beer 14",
-                    "Beer 15", "Beer 16", "Beer 17", "Beer 18", "Beer 19", "Beer 20", 
-                    "Beer 21",
-                    "Beer 22", "Beer 23", "Beer 24", "Beer 25", "Beer 26", "Beer 27", 
-                    "Beer 28",
-                    "Beer 29", "Beer 30", "Beer 31", "Beer 32", "Beer 33", "Beer 34", 
-                    "Beer 35",
-                    "Beer 36", "Beer 37", "Beer 38", "Beer 39", "Beer 40", "Beer 41",
-                    "Beer 42", "Beer 43"
+                  c(" ", "Rockwell Beer Co. Passing Clouds", "Rockwell Beer Co. Fabricius",
+                    "Charleville Brewing Co. Half Wit Wheat", "4 Hands Brewing Co. City Wide", 
+                    "Missouri Beer Co. Eastern MO IPA", 
+                    "Perennial Artisan Ales Sump Coffee Stout", "Alpha Brewing Co. Raspberry Sour Ale",
+                    "Six Mile Bridge Coffee Maple Stout", "Center Ice Brewery Puck O' the Irish",
+                    "Earthbound Beer Doing it Extreme IPA", "Cathedral Square Belgian Style White Ale",
+                    "Third Wheel Brewing Spandex Specter", "2nd Shift Brewing Hibiscus Wit", 
+                    "Wellspent Brewing House Saison",
+                    "O'Fallon Brewery St. Louis Red", "Schlafly Raspberry Hefeweizen", 
+                    "Alpha Brewing Co. Passionfruit Double IPA", "Cathedral Square Heavenly Honey Razz", "Beer 19", 
+                    "Schlafly White Lager", "Charleville Brewing Co. Late Night Karate Kicks"
                   )
       ),
       sliderInput("flavor", "Flavor Rating (Weight 40%)",  min = 1, max = 5, step = 1, value = 1),
@@ -150,7 +150,7 @@ server = function(input, output, session) {
     input$submit
     
     loadData()
-  }, options=list(pageLength=5, lengthMenu = c(5, 10, 15, 20, 30, 50)))
+  }, options=list(pageLength=10, lengthMenu = c(10, 20, 30, 50)))
   
   
   
@@ -179,10 +179,11 @@ server = function(input, output, session) {
       slice(1:5) %>%
       ggplot(aes(x=reorder(Beer, -AvgScore), y=AvgScore)) +
       geom_bar(stat="identity", fill = "goldenrod2", color="black")+geom_text(aes(label=round(AvgScore,1)),
-                                                                              position = position_nudge(y = -8))+
+                                                                              position = position_nudge(y = -2))+
       xlab("Top 5 Beers")+ylab("Average Weighted Score")+geom_errorbar(aes(ymin=AvgScore-SD, ymax=AvgScore+SD), width=.2,
                                                                        position=position_dodge(.9))+
-      theme(axis.text=element_text(face="bold"))+theme_classic()+ylim(0,6.5)
+      theme(axis.text=element_text(face="bold"))+theme_classic()+ylim(0,6.5)+
+      scale_x_discrete(labels = function(x) str_wrap(x, width = 10))
     
   })
 }
